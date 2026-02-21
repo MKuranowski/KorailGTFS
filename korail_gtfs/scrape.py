@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2026 Mikołaj Kuranowski
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
 import re
 import sys
 from abc import ABC, abstractmethod
@@ -22,6 +23,8 @@ KO_NOTE = "비고"
 KO_FIRST_STATION = "시발역"
 KO_LAST_STATION = "종착역"
 KO_THROUGH = "경유"
+
+logger = logging.getLogger("Scraper")
 
 
 @dataclass
@@ -58,7 +61,7 @@ def scrape_from_workbook(wb: ExcelWorkbook, path: str = "") -> Iterable[ScrapedT
     for ws in wb.worksheets:
         if "보는방법" in ws.title:
             continue
-        print(path, ws.title, file=sys.stderr)
+        logger.debug("Parsing %s, worksheet %s", path, ws.title)
         yield from scrape_from_worksheet(ws)
 
 
