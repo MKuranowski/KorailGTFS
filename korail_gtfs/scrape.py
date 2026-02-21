@@ -405,6 +405,8 @@ def _extract_note(x: Any) -> str:
     match x:
         case time() | datetime() | timedelta():
             return ""
+        case str():
+            return re.sub(r"\w{1,3}선\s*경유", "", x.strip())
         case _:
             return _stringify(x)
 
