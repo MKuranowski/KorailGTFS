@@ -327,21 +327,32 @@ def _looks_like_train_number(x: str) -> bool:
     return re.search(r"\d+", x) is not None
 
 
-def _clean_station_name(x: str) -> str:
-    """Returns `x`, unless the value is enclosed in parentheses - in which case
+def _clean_station_name(name: str) -> str:
+    """Cleans the provided station name. If the string is enclosed in parenthesis,
+    those are removed. Any trailing "도착" (arrival) or "출발" (departure) words
+    are also stripped.
+
+    Returns `x`, unless the value is enclosed in parentheses - in which case
     those are stripped.
 
-    >>> clean_station_name("Foo")
-    'Foo'
-    >>> clean_station_name("(Bar)")
-    'Bar'
-    >>> clean_station_name("Spam (Eggs)")
-    'Spam (Eggs)'
+    >>> clean_station_name("서울")
+    '서울'
+    >>> clean_station_name("(부산)")
+    '부산'
+    >>> clean_station_name("팡교(경기)")
+    '팡교(경기)'
+    >>> clean_station_name("동대구(도착)")
+    '동대구'
     """
+    # Remove enclosing parenthesis
+    if name and name[0] == "(" and name[-1] == ")":
+        name = name[1:-1]
 
-    if x and x[0] == "(" and x[-1] == ")":
-        return x[1:-1]
-    return x
+    # Remove "arrival" or "departure" suffix
+    name = re.sub(r"\s*(도착|출발)$", "", name)
+    name = re.sub(r"\s*\((도착|출발)\)$", "", name)
+
+    return name
 
 
 def _stringify(x: Any) -> str:
