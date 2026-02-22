@@ -15,6 +15,8 @@ from impuls.tools.types import StrPath
 
 from .scrape import ScrapedStopTime, ScrapedTrip, scrape_from_xlsx
 
+STOP_ALIASES = {"평내호평": ["평내호"]}
+
 KOREAN_WEEKDAYS_TO_MASK = {c: 1 << i for i, c in enumerate("월화수목금토일")}
 
 SECOND = 1
@@ -63,7 +65,7 @@ class LoadSchedules(Task):
         self.routes = _create_route_lookup(r.db)
 
         for resource in self.resources:
-            self.logger.info("Loading schedules from %s", self.resources)
+            self.logger.info("Loading schedules from %s", resource)
             self.load_schedules_from_xlsx(r.db, r.resources[resource].stored_at)
 
         self.check_for_unknown_stops()
@@ -83,7 +85,7 @@ class LoadSchedules(Task):
                 converted.calendars.append(self.create_calendar(calendar_id))
 
             # Create the trip
-            trip_id = trip.number
+            trip_id = re.sub(r"^[A-Z]", "", trip.number)
             converted.trips.append(
                 Trip(
                     id=trip_id,
@@ -161,7 +163,14 @@ class LoadSchedules(Task):
 
 def _create_stop_lookup(db: DBConnection) -> dict[str, str]:
     with db.raw_execute("SELECT stop_id, name FROM stops") as query:
-        return {_slugify(cast(str, i[1])): cast(str, i[0]) for i in query}
+        lookup = {_slugify(cast(str, i[1])): cast(str, i[0]) for i in query}
+
+    for name, aliases in STOP_ALIASES.items():
+        if id := lookup[name]:
+            for alias in aliases:
+                lookup[alias] = id
+
+    return lookup
 
 
 def _create_route_lookup(db: DBConnection) -> dict[str, str]:

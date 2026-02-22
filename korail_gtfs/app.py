@@ -23,13 +23,14 @@ class KorailGTFS(App):
                 LoadStaticEntities(),
                 LoadStops(),
                 LoadRoutes(),
-                LoadSchedules("ktx.xlsx", "standard.xlsx"),
+                LoadSchedules("ktx.xlsx", "standard.xlsx", "itx-cheongchun.xlsx"),
                 # TODO: GenerateCalendarExceptions
                 # TODO: RemoveUnusedEntities
                 # TODO: RemoveUnusedTranslations
                 SaveGTFS(GTFS_HEADERS, args.output, ensure_order=True),
             ],
             resources={
+                "itx-cheongchun.xlsx": LocalResource("data/itx-cheongchun.xlsx"),
                 "ktx.xlsx": LocalResource("data/ktx.xlsx"),
                 "standard.xlsx": LocalResource("data/standard.xlsx"),
                 "routes.csv": LocalResource("data/routes.csv"),

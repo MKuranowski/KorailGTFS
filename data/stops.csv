@@ -29,9 +29,11 @@ cheongju,청주,Cheongju,36.6472684,127.3917658
 cheongju_airport,청주공항,Cheongju International Airport,36.7217222,127.4895956
 cheongni,청리,Cheongni,36.3391895,128.1286112
 cheongnyangni,청량리,Cheongnyangni,37.5803059,127.0478932
+cheongpyeong,청평,Cheongpyeong,37.735518,127.426659
 cheongso,청소,Cheongso,36.4454233,126.5908716
 cheoram,철암,Cheoram,37.1130854,129.0363797
 chuam,추암,Chuam,37.4784416,129.1573201
+chuncheon,춘천,Chuncheon,37.884780,127.716799
 chungju,충주,Chungju,36.9758343,127.9084635
 chunyang,춘양,Chunyang,36.9377973,128.9202028
 chupungnyeong,추풍령,Chupungnyeong,36.2131264,127.9959985
@@ -56,10 +58,12 @@ gaepo,개포,Gaepo,36.6270761,128.3284947
 gakgye,각계,Gakgye,36.2081812,127.7253757
 gamgok_janghowon,감곡장호원,Gamgok Janghowon,37.12704,127.6356551
 ganam,가남,Ganam,37.1973892,127.5354857
+gangchon,강촌,Gangchon,37.805702,127.634096
 ganggu,강구,Ganggu,36.352299,129.3722798
 ganggyeong,강경,Ganggyeong,36.1541239,127.0160255
 gangjin,강진,Gangjin,34.628381,126.7724029
 gangneung,강릉,Gangneung,37.7644434,128.8993076
+gapyeong,가평,Gapyeong,37.814541,127.510811
 geundeok,근덕,Geundeok,37.3143669,129.2775482
 geungnakgang,극락강,Geungnakgang,35.1758654,126.8302063
 gijang,기장,Gijang,35.2440641,129.2188675
@@ -147,6 +151,7 @@ maegok,매곡,Maegok,37.4365575,127.7302567
 maehwa,매화,Maehwa,36.8827346,129.4097094
 manjong,만종,Manjong,37.3539225,127.8930823
 masan,마산,Masan,35.2364351,128.5767705
+maseok,마석,Maseok,37.652764,127.311751
 mindungsan,민둥산,Mindungsan,37.2438401,128.7732808
 miryang,밀양,Miryang,35.4747106,128.7716727
 mokpo,목포,Mokpo,34.7913104,126.3873227
@@ -158,6 +163,7 @@ mungyeong,문경,Mungyeong,36.7203384,128.1101193
 myeongbong,명봉,Myeongbong,34.8278753,127.075807
 naju,나주,Naju,35.0139184,126.7174587
 namchang,남창,Namchang,35.4190558,129.2825858
+namchuncheon,남춘천,Namchuncheon,37.864036,127.723880
 namseonghyeon,남성현,Namseonghyeon,35.7048027,128.71613
 namwon,남원,Namwon,35.4114118,127.3608202
 neungju,능주,Neungju,34.9865599,126.9643014
@@ -165,6 +171,7 @@ nonsan,논산,Nonsan,36.2067628,127.092582
 ogeunjang,오근장,Ogeunjang,36.7003474,127.4782518
 okcheon,옥천,Okcheon,36.2980066,127.5652603
 oksan,옥산,Oksan,36.2827918,128.0945283
+oksu,옥수,Oksu,37.540236,127.018317
 okwon,옥원,Okwon,37.1841642,129.3237921
 onyang_oncheon,온양온천,Onyang Oncheon,36.7806189,127.0028808
 osan,오산,Osan,37.145637,127.0667493
@@ -176,6 +183,7 @@ pohang,포항,Pohang,36.0713198,129.3426788
 punggi,풍기,Punggi,36.8742932,128.5234553
 pyeongchang,평창,Pyeongchang,37.5620019,128.4295864
 pyeonghae,평해,Pyeonghae,36.7256023,129.4459842
+pyeongnaehopyeong,평내호평,Pyeongnaehopyeong,37.653207,127.244645
 pyeongtaek,평택,Pyeongtaek,36.991012,127.0851148
 pyeongtaek_jije,평택지제,Pyeongtaek Jije,37.0188058,127.0701207
 sabuk,사북,Sabuk,37.2259877,128.8171166
@@ -190,6 +198,7 @@ sangbong,상봉,Sangbong,37.5969171,127.0854391
 sangdong,상동,Sangdong,35.555578,128.7603774
 sangju,상주,Sangju,36.4104257,128.164172
 sapgyo,삽교,Sapgyo,36.6798421,126.7514513
+sareung,사릉,Sareung,37.651224,127.176667
 sasang,사상,Sasang,35.1626153,128.9889516
 seocheon,서천,Seocheon,36.0821078,126.708483
 seodaegu,서대구,Seodaegu,35.8814513,128.5399736
@@ -222,6 +231,7 @@ suwon,수원,Suwon,37.2660227,126.9997646
 taebaek,태백,Taebaek,37.1759171,128.9839724
 taehwagang,태화강,Taehwagang,35.5385746,129.3538725
 tapri,탑리,Tap-ri,36.2599492,128.6831619
+togyewon,퇴계원,Toegyewon,37.648344,127.143842
 uijeongbu,의정부,Uijeongbu,37.7375763,127.0460628
 uiseong,의성,Uiseong,36.3537656,128.6930625
 uljin,울진,Uljin,36.9815529,129.3955755
