@@ -174,7 +174,7 @@ def _create_stop_lookup(db: DBConnection) -> dict[str, str]:
 
 
 def _create_route_lookup(db: DBConnection) -> dict[str, str]:
-    with db.raw_execute("SELECT route_id, long_name FROM routes") as query:
+    with db.raw_execute("SELECT route_id, short_name FROM routes") as query:
         return {_slugify(cast(str, i[1])): cast(str, i[0]) for i in query}
 
 

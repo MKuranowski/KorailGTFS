@@ -22,8 +22,8 @@ class LoadRoutes(Task):
                     Route(
                         id=row["id"],
                         agency_id="korail",
-                        short_name="",
-                        long_name=row["name_ko"],
+                        short_name=row["name_ko"],
+                        long_name="",
                         type=Route.Type.RAIL,
                         color=row["color"],
                         text_color=text_color_for(row["color"]),
@@ -42,7 +42,7 @@ class LoadRoutes(Task):
                     Translation(
                         table_name="routes",
                         record_id=row["id"],
-                        field_name="route_long_name",
+                        field_name="route_short_name",
                         language="en",
                         translation=row["name_en"],
                     )
