@@ -8,6 +8,7 @@ from impuls import App, LocalResource, Pipeline, PipelineOptions, selector
 from impuls.model import Route
 from impuls.tasks import ExecuteSQL, GenerateShapes, RemoveUnusedEntities, SaveGTFS
 
+from .find_files import SCHEDULES_TO_FIND, find_all_schedules_to_scrape
 from .gtfs import GTFS_HEADERS
 from .load_routes import LoadRoutes
 from .load_schedules import LoadSchedules
@@ -20,12 +21,20 @@ class KorailGTFS(App):
         parser.add_argument("-o", "--output", default="korail.zip")
 
     def prepare(self, args: Namespace, options: PipelineOptions) -> Pipeline:
+        if options.from_cache:
+            excel_resources = {
+                filename: LocalResource(options.workspace_directory / filename)
+                for filename in SCHEDULES_TO_FIND
+            }
+        else:
+            excel_resources = find_all_schedules_to_scrape()
+
         return Pipeline(
             tasks=[
                 LoadStaticEntities(),
                 LoadStops(),
                 LoadRoutes(),
-                LoadSchedules("ktx.xlsx", "standard.xlsx", "itx-cheongchun.xlsx"),
+                LoadSchedules(*excel_resources.keys()),
                 # TODO: GenerateCalendarExceptions
                 RemoveUnusedEntities(),
                 ExecuteSQL(
@@ -62,9 +71,7 @@ class KorailGTFS(App):
                 SaveGTFS(GTFS_HEADERS, args.output, ensure_order=True),
             ],
             resources={
-                "itx-cheongchun.xlsx": LocalResource("data/itx-cheongchun.xlsx"),
-                "ktx.xlsx": LocalResource("data/ktx.xlsx"),
-                "standard.xlsx": LocalResource("data/standard.xlsx"),
+                **excel_resources,
                 "routes.csv": LocalResource("data/routes.csv"),
                 "geo.osm": LocalResource("data/geo.osm"),
             },
