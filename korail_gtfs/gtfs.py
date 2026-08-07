@@ -29,6 +29,7 @@ GTFS_HEADERS = {
         "trip_id",
         "route_id",
         "service_id",
+        "shape_id",
         "trip_short_name",
     ],
     "stop_times.txt": [
@@ -37,6 +38,14 @@ GTFS_HEADERS = {
         "stop_id",
         "arrival_time",
         "departure_time",
+        "shape_dist_traveled",
+    ],
+    "shapes.txt": [
+        "shape_id",
+        "shape_pt_sequence",
+        "shape_pt_lat",
+        "shape_pt_lon",
+        "shape_dist_traveled",
     ],
     "calendar.txt": [
         "service_id",

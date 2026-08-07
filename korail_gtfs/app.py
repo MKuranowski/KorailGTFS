@@ -3,8 +3,10 @@
 
 from argparse import ArgumentParser, Namespace
 
-from impuls import App, LocalResource, Pipeline, PipelineOptions
-from impuls.tasks import ExecuteSQL, RemoveUnusedEntities, SaveGTFS
+import routx
+from impuls import App, LocalResource, Pipeline, PipelineOptions, selector
+from impuls.model import Route
+from impuls.tasks import ExecuteSQL, GenerateShapes, RemoveUnusedEntities, SaveGTFS
 
 from .gtfs import GTFS_HEADERS
 from .load_routes import LoadRoutes
@@ -43,6 +45,19 @@ class KorailGTFS(App):
                         "AND NOT EXISTS (SELECT 1 FROM routes WHERE"
                         " routes.route_id = translations.record_id)"
                     ),
+                ),
+                GenerateShapes(
+                    osm_resource="geo.osm",
+                    osm_profile=routx.OsmCustomProfile(
+                        name="train",
+                        penalties=[
+                            routx.OsmPenalty("highspeed", "yes", 1.0),
+                            routx.OsmPenalty("railway", "rail", 1.5),
+                        ],
+                        access=["access", "train"],
+                    ),
+                    routes=selector.Routes(type=Route.Type.RAIL),
+                    id_prefix="",
                 ),
                 SaveGTFS(GTFS_HEADERS, args.output, ensure_order=True),
             ],
