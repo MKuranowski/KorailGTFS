@@ -4,7 +4,7 @@
 from argparse import ArgumentParser, Namespace
 
 from impuls import App, LocalResource, Pipeline, PipelineOptions
-from impuls.tasks import SaveGTFS
+from impuls.tasks import ExecuteSQL, RemoveUnusedEntities, SaveGTFS
 
 from .gtfs import GTFS_HEADERS
 from .load_routes import LoadRoutes
@@ -25,8 +25,25 @@ class KorailGTFS(App):
                 LoadRoutes(),
                 LoadSchedules("ktx.xlsx", "standard.xlsx", "itx-cheongchun.xlsx"),
                 # TODO: GenerateCalendarExceptions
-                # TODO: RemoveUnusedEntities
-                # TODO: RemoveUnusedTranslations
+                RemoveUnusedEntities(),
+                ExecuteSQL(
+                    task_name="RemoveUnusedStopTranslations",
+                    statement=(
+                        "DELETE FROM translations "
+                        "WHERE table_name = 'stops' "
+                        "AND NOT EXISTS (SELECT 1 FROM stops WHERE"
+                        " stops.stop_id = translations.record_id)"
+                    ),
+                ),
+                ExecuteSQL(
+                    task_name="RemoveUnusedRouteTranslations",
+                    statement=(
+                        "DELETE FROM translations "
+                        "WHERE table_name = 'routes' "
+                        "AND NOT EXISTS (SELECT 1 FROM routes WHERE"
+                        " routes.route_id = translations.record_id)"
+                    ),
+                ),
                 SaveGTFS(GTFS_HEADERS, args.output, ensure_order=True),
             ],
             resources={
