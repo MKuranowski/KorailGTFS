@@ -51,7 +51,7 @@ class KorailGTFS(App):
                 "ktx.xlsx": LocalResource("data/ktx.xlsx"),
                 "standard.xlsx": LocalResource("data/standard.xlsx"),
                 "routes.csv": LocalResource("data/routes.csv"),
-                "stops.csv": LocalResource("data/stops.csv"),
+                "geo.osm": LocalResource("data/geo.osm"),
             },
             options=options,
         )
