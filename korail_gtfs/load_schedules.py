@@ -195,9 +195,15 @@ def _merge_scraped_trips(trips: Sequence[ScrapedTrip]) -> ScrapedTrip:
         return trips[0]
 
     # Check that all trains have the same details
-    numbers = set(i.number for i in trips)
-    kinds = set(i.kind for i in trips)
-    notes = set(i.note for i in trips)
+    numbers = {i.number for i in trips}
+    kinds = {i.kind for i in trips}
+    notes = {i.note for i in trips}
+
+    # Try to de-conflict differing details
+    if len(notes) == 2 and "" in notes:
+        notes.discard("")
+
+    # Validate same details
     if len(numbers) != 1 or len(kinds) != 1 or len(notes) != 1:
         raise ValueError(f"can't merge trains with different details: {numbers=} {kinds=} {notes=}")
 
