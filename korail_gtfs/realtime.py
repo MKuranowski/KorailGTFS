@@ -2,14 +2,19 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import argparse
+import logging
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, TypeAlias, get_args
 
 import requests
 from google.protobuf import json_format
+from impuls.tools.logs import initialize as initialize_logging
 
 from .gtfs_rt import gtfs_realtime_pb2
+
+Format: TypeAlias = Literal["binary", "readable", "json"]
 
 URL = "https://gis.korail.com/api/train?bbox=126.0,34.2,129.6,38.7"
 REFERER = "https://gis.korail.com/korailTalk/entrance"
@@ -87,6 +92,47 @@ def write_file_atomically(path: Path, content: str | bytes) -> None:
     tmp_path.rename(path)
 
 
+def run(output: Path, format: Format) -> None:
+    features = fetch_raw_features()
+    feed = convert_features_to_feed(features)
+
+    match format:
+        case "binary":
+            serialized = feed.SerializeToString()
+        case "readable":
+            serialized = str(feed)
+        case "json":
+            serialized = json_format.MessageToJson(feed, indent=2, ensure_ascii=False)
+        case _:
+            raise ValueError(f"invalid --format {format!r}")
+
+    write_file_atomically(output, serialized)
+
+
+def loop(period_s: int, output: Path, format: Format) -> None:
+    logger = logging.getLogger("KorailGTFSRealtime")
+    initialize_logging(verbose=False)
+
+    backoff = 1
+    while True:
+        last_run = time.monotonic()
+
+        try:
+            run(output, format)
+            backoff = 1
+            logger.info("%s updated successfully", output)
+        except Exception:
+            backoff += 1
+            if backoff > 60:
+                raise ValueError("updated failed too many times, aborting")
+            logger.exception("update failed")
+
+        next_run = last_run + (period_s * backoff)
+        delta = next_run - time.monotonic()
+        if delta > 0:
+            time.sleep(delta)
+
+
 def main() -> None:
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument(
@@ -99,26 +145,24 @@ def main() -> None:
     arg_parser.add_argument(
         "-f",
         "--format",
-        choices=("binary", "readable", "json"),
+        choices=get_args(Format),
         default="binary",
         help="feed format",
     )
+    arg_parser.add_argument(
+        "-l",
+        "--loop",
+        type=int,
+        help="run continuously updating the output file with the given interval (seconds)",
+    )
     args = arg_parser.parse_args()
 
-    features = fetch_raw_features()
-    feed = convert_features_to_feed(features)
-
-    match args.format:
-        case "binary":
-            serialized = feed.SerializeToString()
-        case "readable":
-            serialized = str(feed)
-        case "json":
-            serialized = json_format.MessageToJson(feed, indent=2, ensure_ascii=False)
-        case _:
-            raise ValueError(f"invalid --format {args.format!r}")
-
-    write_file_atomically(args.output, serialized)
+    if args.loop is None:
+        run(args.output, args.format)
+    elif args.loop <= 0:
+        raise ValueError("--loop argument can't be negative")
+    else:
+        loop(args.loop, args.output, args.format)
 
 
 if __name__ == "__main__":
