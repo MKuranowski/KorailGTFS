@@ -9,6 +9,7 @@ from impuls.model import Route
 from impuls.tasks import ExecuteSQL, GenerateShapes, RemoveUnusedEntities, SaveGTFS
 
 from .find_files import SCHEDULES_TO_FIND, find_all_schedules_to_scrape
+from .generate_exceptions import GenerateCalendarExceptions
 from .gtfs import GTFS_HEADERS
 from .load_routes import LoadRoutes
 from .load_schedules import LoadSchedules
@@ -35,7 +36,6 @@ class KorailGTFS(App):
                 LoadStops(),
                 LoadRoutes(),
                 LoadSchedules(*excel_resources.keys()),
-                # TODO: GenerateCalendarExceptions
                 RemoveUnusedEntities(),
                 ExecuteSQL(
                     task_name="RemoveUnusedStopTranslations",
@@ -55,6 +55,7 @@ class KorailGTFS(App):
                         " routes.route_id = translations.record_id)"
                     ),
                 ),
+                GenerateCalendarExceptions(),
                 GenerateShapes(
                     osm_resource="geo.osm",
                     osm_profile=routx.OsmCustomProfile(

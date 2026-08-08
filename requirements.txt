@@ -1,3 +1,4 @@
+holidays
 impuls ~= 2.5
 openpyxl ~= 3.1.5
 protobuf ~= 6.33.5

@@ -59,6 +59,11 @@ GTFS_HEADERS = {
         "saturday",
         "sunday",
     ],
+    "calendar_dates.txt": [
+        "service_id",
+        "date",
+        "exception_type",
+    ],
     "feed_info.txt": [
         "feed_publisher_name",
         "feed_publisher_url",
