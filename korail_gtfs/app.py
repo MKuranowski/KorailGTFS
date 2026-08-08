@@ -5,7 +5,7 @@ from argparse import ArgumentParser, Namespace
 
 import routx
 from impuls import App, LocalResource, Pipeline, PipelineOptions, selector
-from impuls.model import Route
+from impuls.model import Date, Route
 from impuls.tasks import ExecuteSQL, GenerateShapes, RemoveUnusedEntities, SaveGTFS
 
 from .find_files import SCHEDULES_TO_FIND, find_all_schedules_to_scrape
@@ -19,6 +19,7 @@ from .load_stops import LoadStops
 
 class KorailGTFS(App):
     def add_arguments(self, parser: ArgumentParser) -> None:
+        parser.add_argument("-d", "--date", type=Date.from_ymd_str, default=Date.today())
         parser.add_argument("-o", "--output", default="korail.zip")
 
     def prepare(self, args: Namespace, options: PipelineOptions) -> Pipeline:
@@ -28,7 +29,7 @@ class KorailGTFS(App):
                 for filename in SCHEDULES_TO_FIND
             }
         else:
-            excel_resources = find_all_schedules_to_scrape()
+            excel_resources = find_all_schedules_to_scrape(today=args.date)
 
         return Pipeline(
             tasks=[
