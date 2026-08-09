@@ -8,6 +8,8 @@ Generates GTFS Schedule and GTFS Realtime feeds for intercity and regional servi
 South Korea's national rail operator. Data comes from [published Excel schedules](https://www.korail.com/ticket/reserve/train-timeTable),
 and a manually curated dataset of stations.
 
+Prebuilt files, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), are available on <https://mkuran.pl/gtfs/>.
+
 
 Running
 -------
