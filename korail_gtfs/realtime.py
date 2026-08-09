@@ -69,7 +69,16 @@ def convert_feature_to_trip_update(f: Any) -> gtfs_realtime_pb2.TripUpdate:
     trip_id = f["properties"]["trn_no"]
     delay = (f["properties"]["delay"] or 0) * 60
     return gtfs_realtime_pb2.TripUpdate(
-        trip=gtfs_realtime_pb2.TripDescriptor(trip_id=trip_id),
+        trip=gtfs_realtime_pb2.TripDescriptor(
+            trip_id=trip_id,
+            schedule_relationship=gtfs_realtime_pb2.TripDescriptor.ScheduleRelationship.SCHEDULED,
+        ),
+        stop_time_update=[
+            gtfs_realtime_pb2.TripUpdate.StopTimeUpdate(
+                stop_sequence=0,
+                departure=gtfs_realtime_pb2.TripUpdate.StopTimeEvent(delay=delay),
+            )
+        ],
         delay=delay,
     )
 
@@ -78,7 +87,10 @@ def convert_feature_to_vehicle_position(f: Any) -> gtfs_realtime_pb2.VehiclePosi
     trip_id = f["properties"]["trn_no"]
     lon, lat = f["geometry"]["coordinates"]
     return gtfs_realtime_pb2.VehiclePosition(
-        trip=gtfs_realtime_pb2.TripDescriptor(trip_id=trip_id),
+        trip=gtfs_realtime_pb2.TripDescriptor(
+            trip_id=trip_id,
+            schedule_relationship=gtfs_realtime_pb2.TripDescriptor.ScheduleRelationship.SCHEDULED,
+        ),
         position=gtfs_realtime_pb2.Position(latitude=lat, longitude=lon),
     )
 
