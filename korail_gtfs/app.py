@@ -10,6 +10,7 @@ from impuls.tasks import ExecuteSQL, GenerateShapes, RemoveUnusedEntities, SaveG
 
 from .find_files import SCHEDULES_TO_FIND, find_all_schedules_to_scrape
 from .generate_exceptions import GenerateCalendarExceptions
+from .generate_headsigns import GenerateHeadsigns
 from .gtfs import GTFS_HEADERS
 from .load_routes import LoadRoutes
 from .load_schedules import LoadSchedules
@@ -56,6 +57,7 @@ class KorailGTFS(App):
                         " routes.route_id = translations.record_id)"
                     ),
                 ),
+                GenerateHeadsigns(),
                 GenerateCalendarExceptions(),
                 GenerateShapes(
                     osm_resource="geo.osm",

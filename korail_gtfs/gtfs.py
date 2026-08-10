@@ -31,6 +31,7 @@ GTFS_HEADERS = {
         "service_id",
         "shape_id",
         "trip_short_name",
+        "trip_headsign",
     ],
     "stop_times.txt": [
         "trip_id",
