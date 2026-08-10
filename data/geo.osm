@@ -13103,39 +13103,6 @@
     <nd ref='-2120512' />
     <nd ref='-2120513' />
     <nd ref='-2120514' />
-    <nd ref='-2119836' />
-    <nd ref='-2120515' />
-    <nd ref='-2120516' />
-    <nd ref='-2120517' />
-    <nd ref='-2120518' />
-    <nd ref='-2120519' />
-    <nd ref='-2120520' />
-    <nd ref='-2120521' />
-    <nd ref='-2120522' />
-    <nd ref='-2120523' />
-    <nd ref='-2120524' />
-    <nd ref='-2120525' />
-    <nd ref='-2120526' />
-    <nd ref='-2120527' />
-    <nd ref='-2120528' />
-    <nd ref='-2120529' />
-    <nd ref='-2120530' />
-    <nd ref='-2120531' />
-    <nd ref='-2120532' />
-    <nd ref='-2120533' />
-    <nd ref='-2120534' />
-    <nd ref='-2120535' />
-    <nd ref='-2120536' />
-    <nd ref='-2120537' />
-    <nd ref='-2120538' />
-    <nd ref='-2120539' />
-    <nd ref='-2120540' />
-    <nd ref='-2120541' />
-    <nd ref='-2120542' />
-    <nd ref='-2120543' />
-    <nd ref='-2120544' />
-    <nd ref='-2120545' />
-    <nd ref='-2120330' />
     <tag k='highspeed' v='yes' />
     <tag k='railway' v='rail' />
   </way>
@@ -20783,32 +20750,6 @@
     <tag k='railway' v='rail' />
   </way>
   <way id='-173332' action='modify'>
-    <nd ref='-2128084' />
-    <nd ref='-2128085' />
-    <nd ref='-2128086' />
-    <nd ref='-2128087' />
-    <nd ref='-2128088' />
-    <nd ref='-2128089' />
-    <nd ref='-2128090' />
-    <nd ref='-2128091' />
-    <nd ref='-2128092' />
-    <nd ref='-2128093' />
-    <nd ref='-2128094' />
-    <nd ref='-2128095' />
-    <nd ref='-2128096' />
-    <nd ref='-2128097' />
-    <nd ref='-2128098' />
-    <nd ref='-2128140' />
-    <nd ref='-2128141' />
-    <nd ref='-2128142' />
-    <nd ref='-2128143' />
-    <nd ref='-2128166' />
-    <nd ref='-2128167' />
-    <nd ref='-2128168' />
-    <nd ref='-2128169' />
-    <nd ref='-2128170' />
-    <nd ref='-2128171' />
-    <nd ref='-2119836' />
     <nd ref='-2128172' />
     <nd ref='-2128173' />
     <nd ref='-2128174' />
@@ -23285,4 +23226,104 @@
     <nd ref='-2130720' />
     <tag k='railway' v='rail' />
   </way>
+  <way id='-175637' action='modify'>
+    <nd ref='-2120515' />
+    <nd ref='-2120516' />
+    <nd ref='-2120517' />
+    <nd ref='-2120518' />
+    <nd ref='-2120519' />
+    <nd ref='-2120520' />
+    <nd ref='-2120521' />
+    <nd ref='-2120522' />
+    <nd ref='-2120523' />
+    <nd ref='-2120524' />
+    <nd ref='-2120525' />
+    <nd ref='-2120526' />
+    <nd ref='-2120527' />
+    <nd ref='-2120528' />
+    <nd ref='-2120529' />
+    <nd ref='-2120530' />
+    <nd ref='-2120531' />
+    <nd ref='-2120532' />
+    <nd ref='-2120533' />
+    <nd ref='-2120534' />
+    <nd ref='-2120535' />
+    <nd ref='-2120536' />
+    <nd ref='-2120537' />
+    <nd ref='-2120538' />
+    <nd ref='-2120539' />
+    <nd ref='-2120540' />
+    <nd ref='-2120541' />
+    <nd ref='-2120542' />
+    <nd ref='-2120543' />
+    <nd ref='-2120544' />
+    <nd ref='-2120545' />
+    <nd ref='-2120330' />
+    <tag k='highspeed' v='yes' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-175639' action='modify'>
+    <nd ref='-2128084' />
+    <nd ref='-2128085' />
+    <nd ref='-2128086' />
+    <nd ref='-2128087' />
+    <nd ref='-2128088' />
+    <nd ref='-2128089' />
+    <nd ref='-2128090' />
+    <nd ref='-2128091' />
+    <nd ref='-2128092' />
+    <nd ref='-2128093' />
+    <nd ref='-2128094' />
+    <nd ref='-2128095' />
+    <nd ref='-2128096' />
+    <nd ref='-2128097' />
+    <nd ref='-2128098' />
+    <nd ref='-2128140' />
+    <nd ref='-2128141' />
+    <nd ref='-2128142' />
+    <nd ref='-2128143' />
+    <nd ref='-2128166' />
+    <nd ref='-2128167' />
+    <nd ref='-2128168' />
+    <nd ref='-2128169' />
+    <nd ref='-2128170' />
+    <nd ref='-2128171' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-175651' action='modify'>
+    <nd ref='-2128171' />
+    <nd ref='-2119836' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-175653' action='modify'>
+    <nd ref='-2119836' />
+    <nd ref='-2120515' />
+    <tag k='highspeed' v='yes' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-175657' action='modify'>
+    <nd ref='-2119836' />
+    <nd ref='-2128172' />
+    <tag k='railway' v='rail' />
+  </way>
+  <way id='-175661' action='modify'>
+    <nd ref='-2120514' />
+    <nd ref='-2119836' />
+    <tag k='highspeed' v='yes' />
+    <tag k='railway' v='rail' />
+  </way>
+  <relation id='-75' action='modify'>
+    <member type='way' ref='-175651' role='from' />
+    <member type='node' ref='-2119836' role='via' />
+    <member type='way' ref='-175653' role='to' />
+    <tag k='restriction' v='no_right_turn' />
+    <tag k='type' v='restriction' />
+  </relation>
+  <relation id='-77' action='modify'>
+    <member type='way' ref='-175653' role='from' />
+    <member type='node' ref='-2119836' role='via' />
+    <member type='way' ref='-175651' role='to' />
+    <tag k='restriction' v='no_left_turn' />
+    <tag k='type' v='restriction' />
+  </relation>
 </osm>

@@ -63,7 +63,7 @@ class KorailGTFS(App):
                         name="train",
                         penalties=[
                             routx.OsmPenalty("highspeed", "yes", 1.0),
-                            routx.OsmPenalty("railway", "rail", 1.5),
+                            routx.OsmPenalty("railway", "rail", 1.2),
                         ],
                         access=["access", "train"],
                     ),
