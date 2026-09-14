@@ -22,23 +22,23 @@ class Table:
     row_order: bool = False
 
 
-def tables(ws: ExcelWorksheet) -> Iterable[Table]:
+def tables(ws: ExcelWorksheet, weekday_override: str = "") -> Iterable[Table]:
     """Detects and generates all schedule tables from the provided excel worksheet."""
 
     for anchor in anchors(ws):
-        yield table(ws, anchor)
+        yield table(ws, anchor, weekday_override)
 
 
-def table(ws: ExcelWorksheet, anchor: ExcelCell) -> Table:
+def table(ws: ExcelWorksheet, anchor: ExcelCell, weekday_override: str = "") -> Table:
     """Detects a table around the provided anchor (a cell with "열차번호")."""
 
     adjacent = extract.cell(ws, (anchor.row, anchor.column + 1))
     if not looks_like_train_number(adjacent):
         return row_table(ws, anchor)
-    return column_table(ws, anchor)
+    return column_table(ws, anchor, weekday_override)
 
 
-def column_table(ws: ExcelWorksheet, anchor: ExcelCell) -> Table:
+def column_table(ws: ExcelWorksheet, anchor: ExcelCell, weekday_override: str = "") -> Table:
     """Detects a table around the provided anchor, where trips are oriented in columns."""
 
     # | 열차종별 | xxx   | xxx   | xxx   |
@@ -106,6 +106,8 @@ def column_table(ws: ExcelWorksheet, anchor: ExcelCell) -> Table:
             train_note_row = "평일"
         elif "휴일" in ws.title:
             train_note_row = "휴일"
+        elif weekday_override:
+            train_note_row = weekday_override
         else:
             raise ValueError(f"unable to detect operating dates in {ws.title}")
     else:

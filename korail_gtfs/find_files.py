@@ -14,10 +14,11 @@ from impuls.model import Date
 
 BASE_URL = "https://www.korail.com/file/cubedata/COMMON/"
 LIST_URL = "https://www.korail.com/com/userBoard.do?schBcid=ticketTable&mode=list"
-SCHEDULES_TO_FIND = {
-    "ktx.xlsx": "KTX",
-    "standard.xlsx": "일반열차",
-    "itx-cheongchun.xlsx": "ITX-청춘",
+SCHEDULES_TO_FIND: dict[str, list[str]] = {
+    "ktx.xlsx": ["KTX"],
+    "standard.xlsx": ["일반열차"],
+    "itx-cheongchun-monfri.xlsx": ["ITX-청춘", "평일"],
+    "itx-cheongchun-satsun.xlsx": ["ITX-청춘", "휴일"],
 }
 
 logger = logging.getLogger("FindFiles")
@@ -56,8 +57,8 @@ def list_all_files() -> list[File]:
     ]
 
 
-def find_matching_files(all_files: Iterable[File], typ: str) -> list[File]:
-    return [i for i in all_files if "시간표" in i.code and typ in i.name]
+def find_matching_files(all_files: Iterable[File], typ: Iterable[str]) -> list[File]:
+    return [i for i in all_files if "시간표" in i.code and all(j in i.name for j in typ)]
 
 
 def find_current_file(files: Iterable[File], today: Date | None = None) -> File:
@@ -90,7 +91,11 @@ def find_current_file(files: Iterable[File], today: Date | None = None) -> File:
     return best
 
 
-def find_current_matching_file(files: Iterable[File], typ: str, today: Date | None = None) -> File:
+def find_current_matching_file(
+    files: Iterable[File],
+    typ: Iterable[str],
+    today: Date | None = None,
+) -> File:
     matching = find_matching_files(files, typ)
     if not matching:
         raise ValueError(f"no files matching {typ!r}")
